@@ -1,5 +1,6 @@
 import '../index.css';
 import React from "react";
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -117,6 +118,13 @@ function App() {
         <div className="App">
             <CurrentUserContext.Provider value={currentUser}>
                 <Header/>
+                <Routes>
+                    <Route path="/sign-up" element={} />
+                    <Route path="/sign-in" element={} />
+                    <Route path="/" element={
+
+                    } />
+                </Routes>
                 <Main
                     onEditProfile={handleEditProfileClick}
                     onEditAvatar={handleEditAvatarClick}
