@@ -11,6 +11,10 @@ import CurrentUserContext from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup";
 import AddPlacePopup from "./AddPlacePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import ProtectedRoute from "./ProtectedRoute";
+import Register from "./Register";
+import Login from  "./Login";
+import InfoTooltip from "./InfoTooltip";
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
@@ -21,6 +25,14 @@ function App() {
     const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false)
     const [isPopupConfirmationOpen, setIsPopupConfirmationOpen] = React.useState(false)
     const [currentUser, setCurrentUser] = React.useState({})
+    const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false)
+    const [loggedIn, setLoggedIn] = React.useState(false)
+    const [answer, setAnswer] = React.useState({
+        status: false,
+        text: ""
+    })
+    const [userEmail, setUserEmail] = React.useState("")
+    const navigate = useNavigate()
 
     React.useEffect(() => {
         Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -119,11 +131,22 @@ function App() {
             <CurrentUserContext.Provider value={currentUser}>
                 <Header/>
                 <Routes>
-                    <Route path="/sign-up" element={} />
-                    <Route path="/sign-in" element={} />
+                    <Route path="/sign-up" element={<Register title="Регистрация" name="register" handleRegister={handleRegister} />} />
+                    <Route path="/sign-in" element={<Login title="Вход" name="login" handleLogin={handleLogin} />} />
                     <Route path="/" element={
-
+                        <ProtectedRoute
+                            component={Main}
+                            loggedIn={loggedIn}
+                            cards={cards}
+                            onEditProfile={handleEditProfileClick}
+                            onEditAvatar={handleEditAvatarClick}
+                            onAddPlace={handleAddPlaceClick}
+                            onCardClick={handleCardClick}
+                            onCardDelete={handleCardDelete}
+                            onCardLike={handleCardLike}
+                        />
                     } />
+                    <Route path="*" element={<Navigate to="/sigh-in" replace />} />
                 </Routes>
                 <Main
                     onEditProfile={handleEditProfileClick}
