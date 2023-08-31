@@ -1,0 +1,26 @@
+.popup__input {
+  margin: 0;
+  padding: 0 0 13px;
+  display: block;
+  border: 0;
+  box-sizing: border-box;
+  width: 358px;
+  height: 27px;
+  /*opacity: 0.2;*/
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.popup__input:focus {
+  outline: 1px solid black;
+}
+
+@media screen and (max-width: 580px) {
+  .popup__input {
+    width: 238px;
+  }
+}
