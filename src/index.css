@@ -4,6 +4,15 @@
 @import url("../src/blocks/body/body.css");
 @import url("../src/blocks/page/page.css");
 
+@import url("../src/blocks/auth/auth.css");
+@import url("../src/blocks/auth/__container/auth__container.css");
+@import url("../src/blocks/auth/__error-container/auth__error-container.css");
+@import url("../src/blocks/auth/__fieldset/auth__fieldset.css");
+@import url("../src/blocks/auth/__input/auth__input.css");
+@import url("../src/blocks/auth/__redirect/auth__redirect.css");
+@import url("../src/blocks/auth/__save-btn/auth__save-btn.css");
+@import url("../src/blocks/auth/__title/auth__title.css");
+
 @import url("../src/blocks/header/header.css");
 @import url("../src/blocks/header/__logo/header__logo.css");
 
