@@ -113,6 +113,14 @@ function App() {
             }).catch((err) => console.log(err))
     }
 
+    function handleRegister() {
+
+    }
+
+    function handleLogin() {
+
+    }
+
     function closeAllPopups() {
         setSelectedCard(null)
         setIsEditProfilePopupOpen(false)
@@ -148,17 +156,17 @@ function App() {
                     } />
                     <Route path="*" element={<Navigate to="/sigh-in" replace />} />
                 </Routes>
-                <Main
-                    onEditProfile={handleEditProfileClick}
-                    onEditAvatar={handleEditAvatarClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onCardClick={handleCardClick}
-                    onCardDelete={handleCardDelete}
-                    onCardLike={handleCardLike}
-                    cards={cards}
-                    // setCards={setCards}
-                    // currentUser={currentUser}
-                />
+                {/*<Main*/}
+                {/*    onEditProfile={handleEditProfileClick}*/}
+                {/*    onEditAvatar={handleEditAvatarClick}*/}
+                {/*    onAddPlace={handleAddPlaceClick}*/}
+                {/*    onCardClick={handleCardClick}*/}
+                {/*    onCardDelete={handleCardDelete}*/}
+                {/*    onCardLike={handleCardLike}*/}
+                {/*    cards={cards}*/}
+                {/*    // setCards={setCards}*/}
+                {/*    // currentUser={currentUser}*/}
+                {/*/>*/}
                 <Footer/>
                 <EditProfilePopup
                     isOpen={isEditProfilePopupOpen}
