@@ -15,6 +15,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Register from "./Register";
 import Login from  "./Login";
 import InfoTooltip from "./InfoTooltip";
+import {authorize, register, checkToken} from "../utils/auth"
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
@@ -32,7 +33,7 @@ function App() {
         text: ""
     })
     const [userEmail, setUserEmail] = React.useState("")
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     React.useEffect(() => {
         Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -44,6 +45,23 @@ function App() {
 
 
     }, []);
+
+    React.useEffect(() => {
+        handleTokenCheck()
+    })
+
+    function handleTokenCheck() {
+        const jwt = localStorage.getItem('jwt')
+        if (jwt) {
+            checkToken(jwt)
+                .then((res) => {
+                    setLoggedIn(true)
+                    setUserEmail(res.data.email)
+                    useNavigate('/', {replace: true})
+                })
+                .catch(err => console.log(err))
+        }
+    }
 
     function handleCardClick(card) {
         setSelectedCard(card)
@@ -113,12 +131,50 @@ function App() {
             }).catch((err) => console.log(err))
     }
 
-    function handleRegister() {
-
+    function handleRegister(email, password) {
+        register(email, password)
+            .then((res) => {
+                setIsInfoTooltipOpen(true)
+                if (res) {
+                    setAnswer({
+                        status: true,
+                        text: 'Вы успешно зарегистрировались!'
+                    })
+                    useNavigate('/sign-in', {replace: true})
+                }
+            })
+            .catch(() => {
+                setAnswer({
+                    status: false,
+                    text: "Что-то пошло не так! Попробуйте еще раз."
+                })
+            })
     }
 
-    function handleLogin() {
+    function handleLogin(email, password) {
+        authorize(email, password)
+            .then((res) => {
+                if (res) {
+                    setLoggedIn(true)
+                    setUserEmail(email)
+                    useNavigate('/', {replace: true})
+                    localStorage.setItem('jwt', res.token)
+                }
+            })
+            .catch(() => {
+                setAnswer({
+                    status: false,
+                    text: "Что-то пошло не так! Попробуйте еще раз."
+                })
+                setIsInfoTooltipOpen(true)
+            })
+    }
 
+    function handleLogout() {
+        localStorage.removeItem('jwt')
+        useNavigate('/sign-in', {replace: true})
+        setLoggedIn(false)
+        setUserEmail('')
     }
 
     function closeAllPopups() {
@@ -137,7 +193,7 @@ function App() {
     return (
         <div className="App">
             <CurrentUserContext.Provider value={currentUser}>
-                <Header/>
+                <Header logout={handleLogout} userEmail={userEmail}/>
                 <Routes>
                     <Route path="/sign-up" element={<Register title="Регистрация" name="register" handleRegister={handleRegister} />} />
                     <Route path="/sign-in" element={<Login title="Вход" name="login" handleLogin={handleLogin} />} />
@@ -208,6 +264,11 @@ function App() {
                         </>
                     }
                 />
+
+                <InfoTooltip
+                    isOpen={isInfoTooltipOpen}
+                    onClose={closeAllPopups}
+                    answer={answer} />
             </CurrentUserContext.Provider>
         </div>
     );

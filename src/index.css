@@ -15,6 +15,10 @@
 
 @import url("../src/blocks/header/header.css");
 @import url("../src/blocks/header/__logo/header__logo.css");
+@import url("../src/blocks/header/__link/header__link.css");
+@import url("../src/blocks/header/__info/header__info.css");
+@import url("../src/blocks/header/__email/header__email.css");
+@import url("../src/blocks/header/__logout/header__logout.css");
 
 @import url("../src/blocks/profile/profile.css");
 @import url("../src/blocks/profile/__top/profile__top.css");
