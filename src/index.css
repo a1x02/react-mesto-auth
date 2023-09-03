@@ -61,3 +61,5 @@
 @import url("../src/blocks/popup/__input/_type/popup__input_type_error.css");
 @import url("../src/blocks/popup/__input-error/popup__input-error.css");
 @import url("../src/blocks/popup/__label/popup__label.css");
+@import url("../src/blocks/popup/__auth-image/popup__auth-image.css");
+@import url("../src/blocks/popup/__title/_auth/popup__title_auth.css");

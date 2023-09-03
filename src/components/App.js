@@ -33,7 +33,6 @@ function App() {
         text: ""
     })
     const [userEmail, setUserEmail] = React.useState("")
-    // const navigate = useNavigate()
 
     React.useEffect(() => {
         Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -49,6 +48,7 @@ function App() {
     React.useEffect(() => {
         handleTokenCheck()
     })
+    const navigate = useNavigate()
 
     function handleTokenCheck() {
         const jwt = localStorage.getItem('jwt')
@@ -57,7 +57,7 @@ function App() {
                 .then((res) => {
                     setLoggedIn(true)
                     setUserEmail(res.data.email)
-                    useNavigate('/', {replace: true})
+                    navigate('/', {replace: true})
                 })
                 .catch(err => console.log(err))
         }
@@ -131,35 +131,38 @@ function App() {
             }).catch((err) => console.log(err))
     }
 
-    function handleRegister(email, password) {
-        register(email, password)
-            .then((res) => {
+    function handleRegister(data) {
+        register(data.email, data.password)
+            .then(() => {
                 setIsInfoTooltipOpen(true)
-                if (res) {
-                    setAnswer({
-                        status: true,
-                        text: 'Вы успешно зарегистрировались!'
-                    })
-                    useNavigate('/sign-in', {replace: true})
-                }
+                setAnswer({
+                    status: true,
+                    text: 'Вы успешно зарегистрировались!'
+                })
+                navigate('/sign-in', {replace: true})
+
             })
             .catch(() => {
                 setAnswer({
                     status: false,
                     text: "Что-то пошло не так! Попробуйте еще раз."
                 })
+                setIsInfoTooltipOpen(true)
             })
     }
 
-    function handleLogin(email, password) {
-        authorize(email, password)
+    function handleLogin(data) {
+        authorize(data.email, data.password)
             .then((res) => {
-                if (res) {
-                    setLoggedIn(true)
-                    setUserEmail(email)
-                    useNavigate('/', {replace: true})
-                    localStorage.setItem('jwt', res.token)
-                }
+                setAnswer({
+                    status: true,
+                    text: 'Вы успешно авторизовались!'
+                })
+                localStorage.setItem('jwt', res.token)
+                setLoggedIn(true)
+                setUserEmail(data.email)
+                navigate('/', {replace: true})
+                setIsInfoTooltipOpen(true)
             })
             .catch(() => {
                 setAnswer({
@@ -172,9 +175,9 @@ function App() {
 
     function handleLogout() {
         localStorage.removeItem('jwt')
-        useNavigate('/sign-in', {replace: true})
         setLoggedIn(false)
         setUserEmail('')
+        navigate('/sign-in')
     }
 
     function closeAllPopups() {
@@ -184,6 +187,7 @@ function App() {
         setIsAddPlacePopupOpen(false)
         setIsImagePopupOpen(false)
         setIsPopupConfirmationOpen(false)
+        setIsInfoTooltipOpen(false)
     }
 
     // if (!currentUser) {

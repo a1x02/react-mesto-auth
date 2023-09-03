@@ -14,9 +14,11 @@ export const register = (email, password) => {
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({email, password})
+        body: JSON.stringify({password, email})
     })
+        // .then(() => console.log({password, email}))
         .then(res => _checkResponseStatus(res))
+
 }
 
 export const authorize = (email, password) => {
