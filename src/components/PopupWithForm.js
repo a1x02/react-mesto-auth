@@ -10,6 +10,7 @@ function PopupWithForm(props) {
                 <form className="popup__form" name="popup-form" id={`form-${props.name}`} noValidate onSubmit={props.onSubmit}>
                     {props.children}
                 </form>
+                <button className="popup__save-button" type="submit">{props.buttonText}</button>
             </div>
         </section>
     )

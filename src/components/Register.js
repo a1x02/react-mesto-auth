@@ -2,22 +2,23 @@ import React from "react";
 import {Link} from 'react-router-dom'
 
 function Register({title, name, handleRegister}) {
-    const [inputValues, setInputValues] = React.useState({
-        email: '',
-        password: ''
-    })
+    const [email, setEmail] = React.useState('')
+    const [password, setPassword] = React.useState('')
 
     function handleSubmit(evt) {
         evt.preventDefault()
-        handleRegister(inputValues)
+        handleRegister({
+            email,
+            password
+        })
     }
 
-    function handleChange(evt) {
-        const {name, value} = evt.target
-        setInputValues({
-            ...inputValues,
-            [name]: value
-        })
+    function handleEmailChange(evt) {
+        setEmail(evt.target.value)
+    }
+
+    function handlePasswordChange(evt) {
+        setPassword(evt.target.value)
     }
 
     return(
@@ -30,12 +31,13 @@ function Register({title, name, handleRegister}) {
                             <input
                                 className="auth__input"
                                 name="email"
+                                value={email}
                                 id="register-email"
                                 placeholder="Email"
                                 type="text"
                                 minLength="2"
                                 maxLength="40"
-                                onChange={handleChange}
+                                onChange={handleEmailChange}
                                 required
                             />
                         </div>
@@ -43,12 +45,13 @@ function Register({title, name, handleRegister}) {
                             <input
                                 className="auth__input"
                                 name="password"
+                                value={password}
                                 id="register-password"
                                 placeholder="Password"
                                 type="password"
                                 minLength="2"
                                 maxLength="200"
-                                onChange={handleChange}
+                                onChange={handlePasswordChange}
                                 required
                             />
                         </div>

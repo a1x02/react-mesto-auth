@@ -47,7 +47,7 @@ function App() {
 
     React.useEffect(() => {
         handleTokenCheck()
-    })
+    }, [])
     const navigate = useNavigate()
 
     function handleTokenCheck() {
@@ -228,13 +228,13 @@ function App() {
                 {/*    // currentUser={currentUser}*/}
                 {/*/>*/}
                 <Footer/>
-                <EditProfilePopup
-                    isOpen={isEditProfilePopupOpen}
-                    onClose={closeAllPopups}
-                    onUpdateUser={handleUpdateUser}
-                    // name={currentUser.name}
-                    // about={currentUser.about}
-                />
+                {/*<EditProfilePopup*/}
+                {/*    isOpen={isEditProfilePopupOpen}*/}
+                {/*    onClose={closeAllPopups}*/}
+                {/*    onUpdateUser={handleUpdateUser}*/}
+                {/*    // name={currentUser.name}*/}
+                {/*    // about={currentUser.about}*/}
+                {/*/>*/}
                 <AddPlacePopup
                     isOpen={isAddPlacePopupOpen}
                     onClose={closeAllPopups}

@@ -39,6 +39,7 @@ function EditProfilePopup(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             onSubmit={handleSubmit}
+            buttonText="Сохранить"
             children={
                 <>
                     <label className="popup__label">
@@ -54,7 +55,6 @@ function EditProfilePopup(props) {
                                onChange={handleDescriptionChange}></input>
                         <span className="popup__input-error description-input-error"></span>
                     </label>
-                    <button className="popup__save-button" type="submit">Сохранить</button>
                 </>
             }
         />
