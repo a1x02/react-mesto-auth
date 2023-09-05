@@ -6,18 +6,7 @@ import CurrentUserContext from "../contexts/CurrentUserContext.js";
 
 
 function Main(props) {
-    // const [cards, setCards] = React.useState([])
     const currentUser = React.useContext(CurrentUserContext)
-
-    // React.useEffect(() => {
-    //     api.getInitialCards()
-    //         .then((response) => {
-    //             props.setCards(response)
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-    // }, [])
 
     return (
         <main className="content">

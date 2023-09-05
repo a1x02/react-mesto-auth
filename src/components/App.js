@@ -65,7 +65,6 @@ function App() {
 
     function handleCardClick(card) {
         setSelectedCard(card)
-        // setIsImagePopupOpen(true)
     }
 
     function handleCardLike(card) {
@@ -190,10 +189,6 @@ function App() {
         setIsInfoTooltipOpen(false)
     }
 
-    // if (!currentUser) {
-    //     return null
-    // }
-
     return (
         <div className="App">
             <CurrentUserContext.Provider value={currentUser}>
@@ -216,25 +211,7 @@ function App() {
                     } />
                     <Route path="*" element={<Navigate to="/sigh-in" replace />} />
                 </Routes>
-                {/*<Main*/}
-                {/*    onEditProfile={handleEditProfileClick}*/}
-                {/*    onEditAvatar={handleEditAvatarClick}*/}
-                {/*    onAddPlace={handleAddPlaceClick}*/}
-                {/*    onCardClick={handleCardClick}*/}
-                {/*    onCardDelete={handleCardDelete}*/}
-                {/*    onCardLike={handleCardLike}*/}
-                {/*    cards={cards}*/}
-                {/*    // setCards={setCards}*/}
-                {/*    // currentUser={currentUser}*/}
-                {/*/>*/}
                 <Footer/>
-                {/*<EditProfilePopup*/}
-                {/*    isOpen={isEditProfilePopupOpen}*/}
-                {/*    onClose={closeAllPopups}*/}
-                {/*    onUpdateUser={handleUpdateUser}*/}
-                {/*    // name={currentUser.name}*/}
-                {/*    // about={currentUser.about}*/}
-                {/*/>*/}
                 <AddPlacePopup
                     isOpen={isAddPlacePopupOpen}
                     onClose={closeAllPopups}
@@ -262,11 +239,6 @@ function App() {
                     title="Вы уверены?"
                     isOpen={isPopupConfirmationOpen}
                     onClose={closeAllPopups}
-                    children={
-                        <>
-                            <button type="submit" className="popup__save-button popup__save-button_delete-card">Да</button>
-                        </>
-                    }
                 />
 
                 <InfoTooltip

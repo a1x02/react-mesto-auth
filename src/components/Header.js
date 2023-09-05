@@ -12,12 +12,10 @@ function Header ({logout, userEmail}) {
                 <Route path="/sign-in" element={
                     <Link to="/sign-up" className="header__link">Регистрация</Link>} />
                 <Route path="/" element={
-                    <>
-                        <div className="header__info">
-                            <p className="header__email">{userEmail}</p>
-                            <button onClick={logout} className="header__logout">Выйти</button>
-                        </div>
-                    </>
+                    <div className="header__info">
+                        <p className="header__email">{userEmail}</p>
+                        <button onClick={logout} className="header__logout">Выйти</button>
+                    </div>
                 } />
             </Routes>
         </header>
