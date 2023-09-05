@@ -3,13 +3,6 @@ import authPass from '../images/auth-true.svg'
 import authFail from '../images/auth-false.svg'
 
 function InfoTooltip({isOpen, answer, onClose}) {
-    function handleClose(evt) {
-        if (evt.target.classList.contains('popup_opened')) {
-            onClose()
-            evt.target.classList.remove('popup_opened')
-        }
-    }
-
     return(
         <div className={`popup ${isOpen ? "popup_opened" : ""}`}>
             <div className="popup__container">
